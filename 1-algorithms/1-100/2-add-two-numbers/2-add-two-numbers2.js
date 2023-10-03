@@ -10,7 +10,6 @@ var addTwoNumbers = function (l1, l2) {
     }
 
     let total = int1 + int2;
-    let digits = total.toString().length;
     let reverse = [];
     while (total > 0) {
         reverse.push(total % 10);
