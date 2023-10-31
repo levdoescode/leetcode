@@ -1,6 +1,9 @@
 var convert = function (s, numRows) {
     let reverted = "";
     const numLetters = s.length;
+    if (numRows == 1) {
+        return s;
+    }
 
     let v = (numRows * 2) - 2;
     for (let row = 0; row < numRows; row++) {
@@ -20,4 +23,3 @@ var convert = function (s, numRows) {
 
 console.log(convert("PAYPALISHIRING", 3));
 console.log(convert("PAYPALISHIRING", 4));
-//console.log(convert("abcdefghijklmnopqrstuvw", 6));
