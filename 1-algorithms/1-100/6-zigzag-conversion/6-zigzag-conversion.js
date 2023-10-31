@@ -1,25 +1,23 @@
-var convert = function(s, numRows) {
+var convert = function (s, numRows) {
     let reverted = "";
-    //const len = s.length;
-    const bridge = numRows - 2;
-    let i = 0;
-    let row = 0;
-    let step = 0;
-    let pos = 0;
-    while (i < s.length) {
-        reverted += s[pos];
-        pos += (numRows - row) + (bridge - step);
-        if (pos > s.length) {
-            if (row > 0 && row < numRows - 1) {
-                step += 1;
+    const numLetters = s.length;
+
+    let v = (numRows * 2) - 2;
+    for (let row = 0; row < numRows; row++) {
+        let pos = row;
+        while (pos < numLetters) {
+            reverted += s[pos];
+            pos += v;
+            if (row > 0 && row < numRows - 1 && pos < numLetters) {
+                reverted += s[pos];
             }
-            row += 1;
-            pos = row;
+            pos += row * 2;
         }
-        i += 1;
+        v -= 2;
     }
     return reverted;
 };
 
 console.log(convert("PAYPALISHIRING", 3));
 console.log(convert("PAYPALISHIRING", 4));
+//console.log(convert("abcdefghijklmnopqrstuvw", 6));
