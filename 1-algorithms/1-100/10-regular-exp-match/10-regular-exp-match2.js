@@ -5,18 +5,27 @@ var isMatch = function(s, p) {
     const matrix = Array.from({length: height}).map(() => Array.from({length: width}).fill(false));
     matrix[0][0] = true;
 
-    let literalCount = 0;
-    for (let j = 0; j < p.length; j++) {
-        if (p[j] != '*') {
-            literalCount++;
+    let seed = [true];
+    let match = true;
+    for (let i = 0; i < p.length; i++) {
+        if (!match) {
+            seed.push(false);
+            continue;
+        }
+
+        if (p[i] === '*') {
+            seed.push(true);
         } else {
-            literalCount--;
+            if (i > 0 && seed[i] === false) {
+                match = false;
+            }
+            seed.push(false);
         }
     }
 
-    for (let j = 1; j < width; j++) {
-        matrix[0][j] = literalCount == 0;
-    }
+    console.log(seed);
+    matrix[0] = seed;
+    //console.log(matrix);
 
     for (let i = 1; i < height; i++) {
         for (let j = 1; j < width; j++) {
@@ -35,9 +44,11 @@ var isMatch = function(s, p) {
     return matrix[height - 1][width - 1];
 };
 
-// console.log(isMatch("aa", "a"));
-// console.log(isMatch("aa", "a*"));
-// console.log(isMatch("ab", ".*"));
-// console.log(isMatch("abdabcabc", "ab.*"));
-// console.log(isMatch("abababab", "ab*"));
+console.log(isMatch("aa", "a"));
+console.log(isMatch("aa", "a*"));
+console.log(isMatch("ab", ".*"));
+console.log(isMatch("abdabcabc", "ab.*"));
+console.log(isMatch("abababab", "ab*"));
 console.log(isMatch("aab", "c*a*b"));
+console.log(isMatch("aab", "cc*a*b"));
+console.log(isMatch("mississippi", "mis*is*ip*."));
