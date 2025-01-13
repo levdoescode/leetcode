@@ -17,6 +17,7 @@ function getNumberFromLinkedList(node: ListNode | null): number {
 }
 
 function createLinkedList(number: number): ListNode {
+    if (number === 0) return new ListNode(0);
     let head: ListNode | null = null;
     let tail: ListNode | null = null;
     while (number > 0) {
@@ -40,3 +41,5 @@ function addTwoNumbers(l1: ListNode | null, l2: ListNode | null): ListNode | nul
 const l1 = new ListNode(2, new ListNode(4, new ListNode(3)));
 const l2 = new ListNode(5, new ListNode(6, new ListNode(4)));
 console.log(addTwoNumbers(l1, l2)); // 7 -> 0 -> 8
+
+// Doesn't work with very large numbers due to the JS 'number' type
